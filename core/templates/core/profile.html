@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+    <title>Your Profile </title>
+
+</head>
+<body>
+    {% if messages %}
+                {% for message in messages  %}
+                <p {% if message.tags %} class='{{ message.tags}}' {% endif %}>{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                <br>
+
+        <div class="container-fluid text-center p-4 " style='border:2px solid black;margin:auto;width:500px'>
+            <h5>Welcome {{user.first_name}}&nbsp;{{user.last_name}} !</h5>   
+        {% if detail.profile_image.url != '' %}
+        <img src="{{detail.profile_image.url}}" alt="" , width="200px" height="200px" class="img-thumbnail img-responsive-fluid  mt-4">
+        {% else %}
+        {% endif %}
+        <h5>User: {{detail.user_type}}</h5>    
+        <h5>Address: {{detail.locality}} {{detail.city}}({{detail.pin}}),{{detail.state}}</h5>     
+    <a href="{% url 'logout' %}" class="btn btn-warning mx-2">Logout</a>       
+        </div>     
+
+</body>
+</html>
